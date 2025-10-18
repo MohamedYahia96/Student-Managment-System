@@ -1,4 +1,4 @@
-# Student Assignment Manager — Project Lifecycle & Sequence
+# Student Assignment Manager â€” Project Lifecycle & Sequence
 
 This document summarizes the application lifecycle, runtime sequences, and developer guidance for the Student Assignment Manager (.NET 8 Windows Forms, EF Core - Code First).
 
@@ -82,11 +82,13 @@ Program -> LoginForm -> (Login) -> Program -> DashboardForm -> User clicks Add -
 
 - Setup and link DataBase
 - Dashboard Form , Search & Filter
+  
 =====================================
 2) Hossam Abdelhamid
 
 - Login Form 
 - Register Form
+  
 =====================================
 2) Anas Eid
 
