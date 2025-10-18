@@ -1,0 +1,520 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using StudentAssignmentManager.Data;
+using StudentAssignmentManager.Models;
+using StudentAssignmentManager.Repositories;
+
+namespace StudentAssignmentManager.Forms
+{
+    public partial class SearchFilterForm : Form
+    {
+        private Student _currentStudent;
+        private DashboardForm _parentDashboard;
+        private StudentSystemDbContext _context;
+        private AssignmentRepository _assignmentRepo;
+        private CourseRepository _courseRepo;
+
+        private TextBox txtSearchKeyword;
+        private CheckedListBox clbCourses;
+        private CheckBox chkHigh;
+        private CheckBox chkMedium;
+        private CheckBox chkLow;
+        private CheckBox chkPending;
+        private CheckBox chkInProgress;
+        private CheckBox chkComplete;
+        private CheckBox chkOverdue;
+        private RadioButton rbAll;
+        private RadioButton rbThisWeek;
+        private RadioButton rbThisMonth;
+        private RadioButton rbOverdueOnly;
+        private RadioButton rbCustomRange;
+        private DateTimePicker dtpFrom;
+        private DateTimePicker dtpTo;
+        private Button btnSearch;
+        private Button btnClearAll;
+        private DataGridView dgvResults;
+
+        public SearchFilterForm(Student student, DashboardForm parentDashboard)
+        {
+            _currentStudent = student;
+            _parentDashboard = parentDashboard;
+            _context = new StudentSystemDbContext();
+            _assignmentRepo = new AssignmentRepository(_context);
+            _courseRepo = new CourseRepository(_context);
+
+            InitializeComponent();
+            LoadCourses();
+        }
+
+        private void InitializeComponent()
+        {
+            this.Text = "Search & Filter Assignments";
+            this.Size = new Size(1000, 700);
+            this.StartPosition = FormStartPosition.CenterParent;
+
+            var lblTitle = new Label
+            {
+                Text = "Search & Filter Assignments",
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                Location = new Point(20, 20),
+                Size = new Size(400, 30)
+            };
+
+            // Search Keyword
+            var lblSearch = new Label
+            {
+                Text = "Search Keywords:",
+                Location = new Point(20, 60),
+                Size = new Size(120, 20)
+            };
+
+            txtSearchKeyword = new TextBox
+            {
+                Location = new Point(150, 58),
+                Size = new Size(300, 25),
+                PlaceholderText = "Search in title, description, course..."
+            };
+
+            btnSearch = new Button
+            {
+                Text = "🔍 Search",
+                Location = new Point(460, 56),
+                Size = new Size(100, 30)
+            };
+            btnSearch.Click += BtnSearch_Click;
+
+            btnClearAll = new Button
+            {
+                Text = "Clear All",
+                Location = new Point(570, 56),
+                Size = new Size(100, 30)
+            };
+            btnClearAll.Click += BtnClearAll_Click;
+
+            // Filter by Course
+            var lblCourses = new Label
+            {
+                Text = "Filter by Course:",
+                Font = new Font("Arial", 9, FontStyle.Bold),
+                Location = new Point(20, 105),
+                Size = new Size(150, 20)
+            };
+
+            clbCourses = new CheckedListBox
+            {
+                Location = new Point(20, 130),
+                Size = new Size(250, 120),
+                CheckOnClick = true
+            };
+
+            // Filter by Priority
+            var lblPriority = new Label
+            {
+                Text = "Filter by Priority:",
+                Font = new Font("Arial", 9, FontStyle.Bold),
+                Location = new Point(290, 105),
+                Size = new Size(150, 20)
+            };
+
+            chkHigh = new CheckBox
+            {
+                Text = "High",
+                Location = new Point(290, 130),
+                Size = new Size(100, 25),
+                Checked = true
+            };
+
+            chkMedium = new CheckBox
+            {
+                Text = "Medium",
+                Location = new Point(290, 160),
+                Size = new Size(100, 25),
+                Checked = true
+            };
+
+            chkLow = new CheckBox
+            {
+                Text = "Low",
+                Location = new Point(290, 190),
+                Size = new Size(100, 25),
+                Checked = true
+            };
+
+            // Filter by Status
+            var lblStatus = new Label
+            {
+                Text = "Filter by Status:",
+                Font = new Font("Arial", 9, FontStyle.Bold),
+                Location = new Point(410, 105),
+                Size = new Size(150, 20)
+            };
+
+            chkPending = new CheckBox
+            {
+                Text = "Pending",
+                Location = new Point(410, 130),
+                Size = new Size(120, 25),
+                Checked = true
+            };
+
+            chkInProgress = new CheckBox
+            {
+                Text = "In Progress",
+                Location = new Point(410, 160),
+                Size = new Size(120, 25),
+                Checked = true
+            };
+
+            chkComplete = new CheckBox
+            {
+                Text = "Complete",
+                Location = new Point(410, 190),
+                Size = new Size(120, 25),
+                Checked = true
+            };
+
+            chkOverdue = new CheckBox
+            {
+                Text = "Overdue",
+                Location = new Point(410, 220),
+                Size = new Size(120, 25),
+                Checked = true
+            };
+
+            // Filter by Deadline
+            var lblDeadline = new Label
+            {
+                Text = "Filter by Deadline:",
+                Font = new Font("Arial", 9, FontStyle.Bold),
+                Location = new Point(20, 270),
+                Size = new Size(150, 20)
+            };
+
+            rbAll = new RadioButton
+            {
+                Text = "All",
+                Location = new Point(20, 295),
+                Size = new Size(150, 25),
+                Checked = true
+            };
+            rbAll.CheckedChanged += DateFilter_CheckedChanged;
+
+            rbThisWeek = new RadioButton
+            {
+                Text = "Due this week",
+                Location = new Point(20, 325),
+                Size = new Size(150, 25)
+            };
+            rbThisWeek.CheckedChanged += DateFilter_CheckedChanged;
+
+            rbThisMonth = new RadioButton
+            {
+                Text = "Due this month",
+                Location = new Point(20, 355),
+                Size = new Size(150, 25)
+            };
+            rbThisMonth.CheckedChanged += DateFilter_CheckedChanged;
+
+            rbOverdueOnly = new RadioButton
+            {
+                Text = "Overdue",
+                Location = new Point(20, 385),
+                Size = new Size(150, 25)
+            };
+            rbOverdueOnly.CheckedChanged += DateFilter_CheckedChanged;
+
+            rbCustomRange = new RadioButton
+            {
+                Text = "Custom range:",
+                Location = new Point(20, 415),
+                Size = new Size(120, 25)
+            };
+            rbCustomRange.CheckedChanged += DateFilter_CheckedChanged;
+
+            var lblFrom = new Label
+            {
+                Text = "From:",
+                Location = new Point(180, 420),
+                Size = new Size(50, 20)
+            };
+
+            dtpFrom = new DateTimePicker
+            {
+                Location = new Point(230, 417),
+                Size = new Size(200, 25),
+                Format = DateTimePickerFormat.Short,
+                Enabled = false
+            };
+
+            var lblTo = new Label
+            {
+                Text = "To:",
+                Location = new Point(450, 420),
+                Size = new Size(30, 20)
+            };
+
+            dtpTo = new DateTimePicker
+            {
+                Location = new Point(480, 417),
+                Size = new Size(200, 25),
+                Format = DateTimePickerFormat.Short,
+                Enabled = false
+            };
+
+            // Results DataGridView
+            var lblResults = new Label
+            {
+                Text = "Search Results:",
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                Location = new Point(20, 460),
+                Size = new Size(150, 25)
+            };
+
+            dgvResults = new DataGridView
+            {
+                Location = new Point(20, 490),
+                Size = new Size(940, 150),
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false
+            };
+            dgvResults.DoubleClick += DgvResults_DoubleClick;
+
+            // Add all controls
+            this.Controls.Add(lblTitle);
+            this.Controls.Add(lblSearch);
+            this.Controls.Add(txtSearchKeyword);
+            this.Controls.Add(btnSearch);
+            this.Controls.Add(btnClearAll);
+            this.Controls.Add(lblCourses);
+            this.Controls.Add(clbCourses);
+            this.Controls.Add(lblPriority);
+            this.Controls.Add(chkHigh);
+            this.Controls.Add(chkMedium);
+            this.Controls.Add(chkLow);
+            this.Controls.Add(lblStatus);
+            this.Controls.Add(chkPending);
+            this.Controls.Add(chkInProgress);
+            this.Controls.Add(chkComplete);
+            this.Controls.Add(chkOverdue);
+            this.Controls.Add(lblDeadline);
+            this.Controls.Add(rbAll);
+            this.Controls.Add(rbThisWeek);
+            this.Controls.Add(rbThisMonth);
+            this.Controls.Add(rbOverdueOnly);
+            this.Controls.Add(rbCustomRange);
+            this.Controls.Add(lblFrom);
+            this.Controls.Add(dtpFrom);
+            this.Controls.Add(lblTo);
+            this.Controls.Add(dtpTo);
+            this.Controls.Add(lblResults);
+            this.Controls.Add(dgvResults);
+        }
+
+        private void LoadCourses()
+        {
+            var courses = _courseRepo.GetCoursesByStudent(_currentStudent.StudentId);
+            foreach (var course in courses)
+            {
+                clbCourses.Items.Add(new CourseCheckItem
+                {
+                    CourseId = course.CourseId,
+                    CourseName = $"{course.CourseCode} - {course.CourseName}"
+                }, true);
+            }
+        }
+
+        private void DateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpFrom.Enabled = rbCustomRange.Checked;
+            dtpTo.Enabled = rbCustomRange.Checked;
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            PerformSearch();
+        }
+
+        private void PerformSearch()
+        {
+            string searchTerm = txtSearchKeyword.Text;
+
+            // Get selected priorities
+            var priorities = new List<string>();
+            if (chkHigh.Checked) priorities.Add("High");
+            if (chkMedium.Checked) priorities.Add("Medium");
+            if (chkLow.Checked) priorities.Add("Low");
+
+            // Get selected statuses
+            var statuses = new List<string>();
+            if (chkPending.Checked) statuses.Add("Pending");
+            if (chkInProgress.Checked) statuses.Add("In Progress");
+            if (chkComplete.Checked) statuses.Add("Complete");
+            if (chkOverdue.Checked) statuses.Add("Overdue");
+
+            // Get date range
+            DateTime? startDate = null;
+            DateTime? endDate = null;
+
+            if (rbThisWeek.Checked)
+            {
+                startDate = DateTime.Now;
+                endDate = DateTime.Now.AddDays(7);
+            }
+            else if (rbThisMonth.Checked)
+            {
+                startDate = DateTime.Now;
+                endDate = DateTime.Now.AddMonths(1);
+            }
+            else if (rbOverdueOnly.Checked)
+            {
+                endDate = DateTime.Now;
+            }
+            else if (rbCustomRange.Checked)
+            {
+                startDate = dtpFrom.Value.Date;
+                endDate = dtpTo.Value.Date.AddDays(1).AddSeconds(-1);
+            }
+
+            // Perform search
+            var results = _assignmentRepo.SearchAssignments(
+                _currentStudent.StudentId,
+                searchTerm,
+                priorities.Any() ? priorities : null,
+                statuses.Any() ? statuses : null,
+                startDate,
+                endDate
+            );
+
+            // Filter by selected courses
+            var selectedCourseIds = clbCourses.CheckedItems
+                .Cast<CourseCheckItem>()
+                .Select(c => c.CourseId)
+                .ToList();
+
+            if (selectedCourseIds.Any())
+            {
+                results = results.Where(a => selectedCourseIds.Contains(a.CourseId)).ToList();
+            }
+
+            // Display results
+            var displayData = results.Select(a => new
+            {
+                AssignmentId = a.AssignmentId,
+                Course = a.Course.CourseName,
+                Title = a.Title,
+                Description = a.Description,
+                DueDate = a.DueDate.ToString("MM/dd/yyyy hh:mm tt"),
+                Priority = a.Priority,
+                Status = a.Status
+            }).ToList();
+
+            dgvResults.DataSource = displayData;
+
+            if (dgvResults.Columns["AssignmentId"] != null)
+                dgvResults.Columns["AssignmentId"].Visible = false;
+
+            // Color coding
+            foreach (DataGridViewRow row in dgvResults.Rows)
+            {
+                var priority = row.Cells["Priority"].Value?.ToString();
+                var status = row.Cells["Status"].Value?.ToString();
+
+                if (status == "Complete")
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else if (status == "Overdue")
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+                else
+                {
+                    switch (priority)
+                    {
+                        case "High":
+                            row.DefaultCellStyle.BackColor = Color.MistyRose;
+                            break;
+                        case "Medium":
+                            row.DefaultCellStyle.BackColor = Color.LightYellow;
+                            break;
+                        case "Low":
+                            row.DefaultCellStyle.BackColor = Color.LightBlue;
+                            break;
+                    }
+                }
+            }
+
+            // Update status
+            var lblResultCount = new Label
+            {
+                Text = $"Found {results.Count()} assignment(s)",
+                Location = new Point(800, 462),
+                Size = new Size(150, 20)
+            };
+            this.Controls.Add(lblResultCount);
+        }
+
+        private void BtnClearAll_Click(object sender, EventArgs e)
+        {
+            txtSearchKeyword.Clear();
+
+            for (int i = 0; i < clbCourses.Items.Count; i++)
+            {
+                clbCourses.SetItemChecked(i, true);
+            }
+
+            chkHigh.Checked = true;
+            chkMedium.Checked = true;
+            chkLow.Checked = true;
+            chkPending.Checked = true;
+            chkInProgress.Checked = true;
+            chkComplete.Checked = true;
+            chkOverdue.Checked = true;
+
+            rbAll.Checked = true;
+
+            dgvResults.DataSource = null;
+        }
+
+        private void DgvResults_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvResults.SelectedRows.Count > 0)
+            {
+                var assignmentId = (int)dgvResults.SelectedRows[0].Cells["AssignmentId"].Value;
+                var assignment = _assignmentRepo.GetById(assignmentId);
+                var course = _courseRepo.GetById(assignment.CourseId);
+
+                var editForm = new AddEditAssignmentForm(course, assignment);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    PerformSearch();
+                    _parentDashboard?.RefreshAll();
+                }
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _context?.Dispose();
+            base.OnFormClosing(e);
+        }
+    }
+
+    // Helper class for CheckedListBox
+    public class CourseCheckItem
+    {
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
+
+        public override string ToString()
+        {
+            return CourseName;
+        }
+    }
+}

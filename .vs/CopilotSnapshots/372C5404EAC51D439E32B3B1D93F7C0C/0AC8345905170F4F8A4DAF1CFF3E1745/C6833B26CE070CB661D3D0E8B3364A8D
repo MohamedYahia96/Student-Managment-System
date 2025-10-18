@@ -1,0 +1,541 @@
+﻿using StudentAssignmentManager.Forms; // Add this at the top with other using directives
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using System.IO;
+using System.Text;
+using StudentAssignmentManager.Data;
+using StudentAssignmentManager.Models;
+using StudentAssignmentManager.Repositories;
+using Timer = System.Windows.Forms.Timer;
+using System.Text.RegularExpressions;
+
+namespace StudentAssignmentManager.Forms
+{
+    public partial class DashboardForm : Form
+    {
+        private Student _currentStudent;
+        private StudentSystemDbContext _context;
+        private CourseRepository _courseRepo;
+        private AssignmentRepository _assignmentRepo;
+
+        private MenuStrip menuStrip;
+        private ToolStrip toolStrip;
+        private StatusStrip statusStrip;
+        private SplitContainer splitContainer;
+        private ListBox lstCourses;
+        private DataGridView dgvAllAssignments;
+        private Timer reminderTimer;
+
+        public DashboardForm(Student student)
+        {
+            _currentStudent = student;
+            _context = new StudentSystemDbContext();
+            _courseRepo = new CourseRepository(_context);
+            _assignmentRepo = new AssignmentRepository(_context);
+
+            InitializeComponent();
+            LoadCourses();
+            LoadAllAssignments();
+            StartReminderTimer();
+        }
+
+        private void InitializeComponent()
+        {
+            this.Text = $"Student Assignment Manager - {_currentStudent.FullName}";
+            this.Size = new Size(1200, 800);
+            this.WindowState = FormWindowState.Maximized;
+            this.IsMdiContainer = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            CreateMenuStrip();
+            //CreateToolStrip();
+            CreateStatusStrip();
+            CreateMainLayout();
+        }
+
+        private void CreateMenuStrip()
+        {
+            menuStrip = new MenuStrip();
+
+            // File Menu
+            var fileMenu = new ToolStripMenuItem("&File");
+            fileMenu.DropDownItems.Add("&New Course", null, NewCourse_Click);
+            fileMenu.DropDownItems.Add("&Export Assignments", null, ExportAssignments_Click);
+            fileMenu.DropDownItems.Add(new ToolStripSeparator());
+            fileMenu.DropDownItems.Add("E&xit", null, (s, e) => Application.Exit());
+
+            // Course Menu
+            var courseMenu = new ToolStripMenuItem("&Course");
+            courseMenu.DropDownItems.Add("&Add Course", null, NewCourse_Click);
+            courseMenu.DropDownItems.Add("&Edit Course", null, EditCourse_Click);
+            courseMenu.DropDownItems.Add("&Delete Course", null, DeleteCourse_Click);
+
+            // View Menu
+            var viewMenu = new ToolStripMenuItem("&View");
+            viewMenu.DropDownItems.Add("&Refresh", null, (s, e) => RefreshAll());
+            viewMenu.DropDownItems.Add(new ToolStripSeparator());
+            viewMenu.DropDownItems.Add("&Search/Filter", null, SearchFilter_Click);
+
+            // Window Menu
+            var windowMenu = new ToolStripMenuItem("&Window");
+            windowMenu.DropDownItems.Add("&Cascade", null, (s, e) => this.LayoutMdi(MdiLayout.Cascade));
+            windowMenu.DropDownItems.Add("Tile &Horizontal", null, (s, e) => this.LayoutMdi(MdiLayout.TileHorizontal));
+            windowMenu.DropDownItems.Add("Tile &Vertical", null, (s, e) => this.LayoutMdi(MdiLayout.TileVertical));
+
+            // Help Menu
+            var helpMenu = new ToolStripMenuItem("&Help");
+            helpMenu.DropDownItems.Add("&About", null, About_Click);
+
+            menuStrip.Items.AddRange(new ToolStripItem[] {
+                fileMenu, courseMenu, viewMenu, windowMenu, helpMenu
+            });
+
+            this.MainMenuStrip = menuStrip;
+            this.Controls.Add(menuStrip);
+        }
+
+        private void CreateToolStrip()
+        {
+            toolStrip = new ToolStrip();
+            toolStrip.Items.Add("New Course", null, NewCourse_Click);
+            toolStrip.Items.Add("Export", null, ExportAssignments_Click);
+            toolStrip.Items.Add(new ToolStripSeparator());
+            toolStrip.Items.Add("Search", null, SearchFilter_Click);
+            toolStrip.Items.Add("Refresh", null, (s, e) => RefreshAll());
+
+            this.Controls.Add(toolStrip);
+        }
+
+        private void CreateStatusStrip()
+        {
+            statusStrip = new StatusStrip();
+            var statusLabel = new ToolStripStatusLabel($"Logged in as: {_currentStudent.FullName}");
+            statusStrip.Items.Add(statusLabel);
+
+            this.Controls.Add(statusStrip);
+        }
+
+        private void CreateMainLayout()
+        {
+            //data grid view
+            splitContainer = new SplitContainer
+            {
+                Dock = DockStyle.Fill,
+                Orientation = Orientation.Horizontal,
+                SplitterDistance = 300
+            };
+
+            //add split container panels
+            splitContainer.Panel1.Padding = new Padding(20);
+
+            // Top Panel - Course List
+            var topPanel = new Panel { Dock = DockStyle.Fill };
+
+            
+            var lblCourses = new Label
+            {
+                Text = "My Courses",
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                Location = new Point(0, 10), // Add more space from the left
+                Size = new Size(150, 28) // Make label a bit smaller
+            };
+            var btnAddCourse = new Button
+            {
+                Text = "+ Add Course",
+                Location = new Point(75, 40), // Add more space from the left
+                Size = new Size(110, 28)  ,    // Make button a bit smaller
+            };
+            btnAddCourse.Click += NewCourse_Click;
+
+
+            lstCourses = new ListBox
+            {
+                Location = new Point(5, 80),
+                Size = new Size(250, 350),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left
+            };
+            lstCourses.SelectedIndexChanged += LstCourses_SelectedIndexChanged;
+            lstCourses.DoubleClick += LstCourses_DoubleClick;
+
+            topPanel.Controls.Add(lblCourses);
+            topPanel.Controls.Add(btnAddCourse);
+            topPanel.Controls.Add(lstCourses);
+
+            splitContainer.Panel1.Controls.Add(topPanel);
+
+            // Bottom Panel - All Assignments
+            var bottomPanel = new Panel { Dock = DockStyle.Fill };
+
+            var lblAssignments = new Label
+            {
+                Text = "All Assignments",
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                Location = new Point(10, 10), // Add more space from the left
+                Size = new Size(150, 25) // Make label a bit smaller
+            };
+
+            dgvAllAssignments = new DataGridView
+            {
+                Location = new Point(5, 40),
+                //fit to panel
+                Size = new Size(1150, 400),
+
+                //Size = new Size(580, 400),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false
+            };
+            dgvAllAssignments.DoubleClick += DgvAllAssignments_DoubleClick;
+
+            bottomPanel.Controls.Add(lblAssignments);
+            bottomPanel.Controls.Add(dgvAllAssignments);
+
+            splitContainer.Panel2.Controls.Add(bottomPanel);
+
+            this.Controls.Add(splitContainer);
+        }
+
+        private void LoadCourses()
+        {
+            lstCourses.Items.Clear();
+            var courses = _courseRepo.GetCoursesByStudent(_currentStudent.StudentId);
+
+            foreach (var course in courses)
+            {
+                lstCourses.Items.Add(new CourseListItem
+                {
+                    CourseId = course.CourseId,
+                    DisplayText = $"{course.CourseCode} - {course.CourseName}"
+                });
+            }
+        }
+
+        private void LoadAllAssignments()
+        {
+            // Get all assignments for the current student
+            var assignments = _assignmentRepo.GetAssignmentsByStudent(_currentStudent.StudentId);
+
+            UpdateAssignmentsGrid(assignments);
+        }
+
+        private void UpdateAssignmentsGrid(IEnumerable<Assignment> assignments)
+        {
+            var displayData = assignments.Select(a => new
+            {
+                AssignmentId = a.AssignmentId,
+                Course = a.Course.CourseName,
+                Title = a.Title,
+                DueDate = a.DueDate.ToString("MM/dd/yyyy hh:mm tt"),
+                Priority = a.Priority,
+                Status = a.Status
+            }).ToList();
+
+            dgvAllAssignments.DataSource = displayData;
+
+            if (dgvAllAssignments.Columns["AssignmentId"] != null)
+                dgvAllAssignments.Columns["AssignmentId"].Visible = false;
+
+            // Color coding
+            foreach (DataGridViewRow row in dgvAllAssignments.Rows)
+            {
+                var priority = row.Cells["Priority"].Value?.ToString();
+                var status = row.Cells["Status"].Value?.ToString();
+
+                if (status == "Complete")
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else if (status == "Overdue")
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+                else
+                {
+                    switch (priority)
+                    {
+                        case "High":
+                            row.DefaultCellStyle.BackColor = Color.MistyRose;
+                            break;
+                        case "Medium":
+                            row.DefaultCellStyle.BackColor = Color.LightYellow;
+                            break;
+                        case "Low":
+                            row.DefaultCellStyle.BackColor = Color.LightBlue;
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void RefreshAll()
+        {
+            LoadCourses();
+            LoadAllAssignments();
+
+            foreach (Form childForm in this.MdiChildren)
+            {
+                if (childForm is CourseForm courseForm)
+                {
+                    courseForm.RefreshData();
+                }
+            }
+        }
+
+        private void NewCourse_Click(object sender, EventArgs e)
+        {
+            var addCourseForm = new AddEditCourseForm(_currentStudent);
+            if (addCourseForm.ShowDialog() == DialogResult.OK)
+            {
+                RefreshAll();
+            }
+        }
+
+        private void EditCourse_Click(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedItem is CourseListItem selectedItem)
+            {
+                var course = _courseRepo.GetById(selectedItem.CourseId);
+                var editForm = new AddEditCourseForm(_currentStudent, course);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshAll();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a course to edit.", "No Selection",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void DeleteCourse_Click(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedItem is CourseListItem selectedItem)
+            {
+                var result = MessageBox.Show(
+                    "Are you sure you want to delete this course?\nAll assignments will also be deleted.",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    _courseRepo.Delete(selectedItem.CourseId);
+                    _courseRepo.Save();
+                    RefreshAll();
+                    MessageBox.Show("Course deleted successfully.", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a course to delete.", "No Selection",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void LstCourses_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedItem is CourseListItem selectedItem)
+            {
+                var course = _courseRepo.GetById(selectedItem.CourseId);
+                var editForm = new AddEditCourseForm(_currentStudent, course);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshAll();
+                }
+            }
+        }
+
+        private void DgvAllAssignments_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvAllAssignments.SelectedRows.Count > 0)
+            {
+                var assignmentId = (int)dgvAllAssignments.SelectedRows[0].Cells["AssignmentId"].Value;
+                var assignment = _assignmentRepo.GetById(assignmentId);
+                var course = _courseRepo.GetById(assignment.CourseId);
+
+                var editForm = new AddEditAssignmentForm(course, assignment);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshAll();
+                }
+            }
+        }
+
+        private void SearchFilter_Click(object sender, EventArgs e)
+        {
+            var searchForm = new SearchFilterForm(_currentStudent, this);
+            searchForm.ShowDialog();
+        }
+
+        private void ExportAssignments_Click(object sender, EventArgs e)
+        {
+            using (var saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt";
+                saveDialog.FileName = $"Assignments_{DateTime.Now:yyyyMMdd}.csv";
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var assignments = _assignmentRepo.GetAssignmentsByStudent(_currentStudent.StudentId);
+                        var sb = new StringBuilder();
+                        sb.AppendLine("Course,Title,Description,Due Date,Priority,Status");
+
+                        foreach (var assignment in assignments)
+                        {
+                            sb.AppendLine($"\"{assignment.Course.CourseName}\"," +
+                                $"\"{assignment.Title}\"," +
+                                $"\"{assignment.Description}\"," +
+                                $"{assignment.DueDate:yyyy-MM-dd HH:mm}," +
+                                $"{assignment.Priority}," +
+                                $"{assignment.Status}");
+                        }
+
+                        File.WriteAllText(saveDialog.FileName, sb.ToString());
+                        MessageBox.Show("Assignments exported successfully!", "Export Complete",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error exporting: {ex.Message}", "Export Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void StartReminderTimer()
+        {
+            reminderTimer = new Timer();
+            reminderTimer.Interval = 3600000; // Check every hour
+            reminderTimer.Tick += CheckReminders;
+            reminderTimer.Start();
+            CheckReminders(null, null); // Check immediately
+        }
+
+        private void CheckReminders(object sender, EventArgs e)
+        {
+            var upcomingAssignments = _assignmentRepo.GetUpcomingAssignments(_currentStudent.StudentId, 1);
+
+            foreach (var assignment in upcomingAssignments)
+            {
+                var timeUntilDue = assignment.DueDate - DateTime.Now;
+                if (timeUntilDue.TotalHours <= 24 && timeUntilDue.TotalHours > 0)
+                {
+                    MessageBox.Show(
+                        $"Reminder: '{assignment.Title}' in {assignment.Course.CourseName}\n" +
+                        $"is due in {timeUntilDue.Hours} hours!",
+                        "Assignment Due Soon",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Student Course & Assignment Manager\n\n" +
+                "Version 1.0\n" +
+                "Built with Entity Framework Code First\n\n" +
+                "Features:\n" +
+                "- Multi-document interface\n" +
+                "- Course and assignment management\n" +
+                "- Priority tracking\n" +
+                "- Deadline notifications\n" +
+                "- Export to CSV",
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            reminderTimer?.Stop();
+            reminderTimer?.Dispose();
+            _context?.Dispose();
+            base.OnFormClosing(e);
+        }
+
+        private void LstCourses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedItem is CourseListItem selectedItem)
+            {
+                // Get assignments for selected course
+                var assignments = _assignmentRepo.GetAssignmentsByCourse(selectedItem.CourseId);
+
+                var displayData = assignments.Select(a => new
+                {
+                    AssignmentId = a.AssignmentId,
+                    Course = a.Course.CourseName,
+                    Title = a.Title,
+                    DueDate = a.DueDate.ToString("MM/dd/yyyy hh:mm tt"),
+                    Priority = a.Priority,
+                    Status = a.Status
+                }).ToList();
+
+                dgvAllAssignments.DataSource = displayData;
+
+                if (dgvAllAssignments.Columns["AssignmentId"] != null)
+                    dgvAllAssignments.Columns["AssignmentId"].Visible = false;
+
+                // Color coding for assignments
+                foreach (DataGridViewRow row in dgvAllAssignments.Rows)
+                {
+                    var priority = row.Cells["Priority"].Value?.ToString();
+                    var status = row.Cells["Status"].Value?.ToString();
+
+                    if (status == "Complete")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else if (status == "Overdue")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    }
+                    else
+                    {
+                        switch (priority)
+                        {
+                            case "High":
+                                row.DefaultCellStyle.BackColor = Color.MistyRose;
+                                break;
+                            case "Medium":
+                                row.DefaultCellStyle.BackColor = Color.LightYellow;
+                                break;
+                            case "Low":
+                                row.DefaultCellStyle.BackColor = Color.LightBlue;
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // If no course selected, show all assignments
+                LoadAllAssignments();
+            }
+        }
+    }
+
+    // Helper class for ListBox items
+    public class CourseListItem
+    {
+        public int CourseId { get; set; }
+        public string DisplayText { get; set; }
+
+        public override string ToString()
+        {
+            return DisplayText;
+        }
+    }
+}

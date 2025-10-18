@@ -1,0 +1,98 @@
+﻿using System;
+using System.Windows.Forms;
+using System.Drawing;
+
+namespace StudentAssignmentManager.Controls
+{
+    public class PriorityControl : UserControl
+    {
+        private RadioButton rbLow;
+        private RadioButton rbMedium;
+        private RadioButton rbHigh;
+        private Panel panel;
+
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
+        public string SelectedPriority
+        {
+            get
+            {
+                if (rbHigh.Checked) return "High";
+                if (rbMedium.Checked) return "Medium";
+                return "Low";
+            }
+            set
+            {
+                switch (value)
+                {
+                    case "High":
+                        rbHigh.Checked = true;
+                        break;
+                    case "Medium":
+                        rbMedium.Checked = true;
+                        break;
+                    default:
+                        rbLow.Checked = true;
+                        break;
+                }
+            }
+        }
+
+        public PriorityControl()
+        {
+            InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            this.panel = new Panel();
+            this.rbLow = new RadioButton();
+            this.rbMedium = new RadioButton();
+            this.rbHigh = new RadioButton();
+
+            this.panel.Dock = DockStyle.Fill;
+            this.panel.BorderStyle = BorderStyle.FixedSingle;
+
+            this.rbLow.Text = "Low";
+            this.rbLow.Location = new Point(10, 10);
+            this.rbLow.ForeColor = Color.Green;
+            this.rbLow.CheckedChanged += Priority_CheckedChanged;
+
+            this.rbMedium.Text = "Medium";
+            this.rbMedium.Location = new Point(80, 10);
+            this.rbMedium.ForeColor = Color.Orange;
+            this.rbMedium.Checked = true;
+            this.rbMedium.CheckedChanged += Priority_CheckedChanged;
+
+            this.rbHigh.Text = "High";
+            this.rbHigh.Location = new Point(180, 10);
+            this.rbHigh.ForeColor = Color.Red;
+            this.rbHigh.CheckedChanged += Priority_CheckedChanged;
+
+            this.panel.Controls.Add(this.rbLow);
+            this.panel.Controls.Add(this.rbMedium);
+            this.panel.Controls.Add(this.rbHigh);
+
+            this.Controls.Add(this.panel);
+            this.Size = new Size(270, 40);
+        }
+
+        private void Priority_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                PriorityChanged?.Invoke(this, new PriorityChangedEventArgs(SelectedPriority));
+            }
+        }
+    }
+
+    public class PriorityChangedEventArgs : EventArgs
+    {
+        public string Priority { get; set; }
+
+        public PriorityChangedEventArgs(string priority)
+        {
+            Priority = priority;
+        }
+    }
+}

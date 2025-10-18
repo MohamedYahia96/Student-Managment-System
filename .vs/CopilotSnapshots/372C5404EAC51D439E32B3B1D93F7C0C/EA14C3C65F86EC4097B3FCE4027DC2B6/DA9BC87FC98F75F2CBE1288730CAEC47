@@ -1,0 +1,310 @@
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using StudentAssignmentManager.Data;
+using StudentAssignmentManager.Models;
+using StudentAssignmentManager.Repositories;
+using StudentAssignmentManager.Controls;
+
+namespace StudentAssignmentManager.Forms
+{
+    public partial class AddEditAssignmentForm : Form
+    {
+        private Course _course;
+        private Assignment _editingAssignment;
+        private bool _isEditMode;
+        private StudentSystemDbContext _context;
+        private AssignmentRepository _assignmentRepo;
+
+        private ComboBox cmbCourse;
+        private TextBox txtTitle;
+        private TextBox txtDescription;
+        private DateTimePicker dtpDueDate;
+        private PriorityControl priorityControl;
+        private ComboBox cmbStatus;
+        private CheckBox chkRemind24Hours;
+        private CheckBox chkRemind1Week;
+        private Button btnSave;
+        private Button btnCancel;
+
+        public AddEditAssignmentForm(Course course, Assignment assignment = null)
+        {
+            _course = course;
+            _editingAssignment = assignment;
+            _isEditMode = assignment != null;
+            _context = new StudentSystemDbContext();
+            _assignmentRepo = new AssignmentRepository(_context);
+
+            InitializeComponent();
+
+            if (_isEditMode)
+            {
+                LoadAssignmentData();
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            this.Text = _isEditMode ? "Edit Assignment" : "Add New Assignment";
+            this.Size = new Size(600, 550);
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+
+            // Course (display only)
+            var lblCourse = new Label
+            {
+                Text = "Course:",
+                Location = new Point(20, 20),
+                Size = new Size(100, 20)
+            };
+
+            cmbCourse = new ComboBox
+            {
+                Location = new Point(130, 18),
+                Size = new Size(420, 25),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Enabled = false
+            };
+            cmbCourse.Items.Add($"{_course.CourseCode} - {_course.CourseName}");
+            cmbCourse.SelectedIndex = 0;
+
+            // Title
+            var lblTitle = new Label
+            {
+                Text = "Title:",
+                Location = new Point(20, 60),
+                Size = new Size(100, 20)
+            };
+
+            txtTitle = new TextBox
+            {
+                Location = new Point(130, 58),
+                Size = new Size(420, 25)
+            };
+
+            // Description
+            var lblDescription = new Label
+            {
+                Text = "Description:",
+                Location = new Point(20, 100),
+                Size = new Size(100, 20)
+            };
+
+            txtDescription = new TextBox
+            {
+                Location = new Point(130, 98),
+                Size = new Size(420, 80),
+                Multiline = true,
+                ScrollBars = ScrollBars.Vertical
+            };
+
+            // Due Date
+            var lblDueDate = new Label
+            {
+                Text = "Due Date:",
+                Location = new Point(20, 195),
+                Size = new Size(100, 20)
+            };
+
+            dtpDueDate = new DateTimePicker
+            {
+                Location = new Point(130, 193),
+                Size = new Size(250, 25),
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = "MM/dd/yyyy hh:mm tt",
+                ShowUpDown = false
+            };
+
+            // Priority
+            var lblPriority = new Label
+            {
+                Text = "Priority:",
+                Location = new Point(20, 235),
+                Size = new Size(100, 20)
+            };
+
+            priorityControl = new PriorityControl
+            {
+                Location = new Point(130, 233)
+            };
+            priorityControl.PriorityChanged += PriorityControl_PriorityChanged;
+
+            // Status
+            var lblStatus = new Label
+            {
+                Text = "Status:",
+                Location = new Point(20, 285),
+                Size = new Size(100, 20)
+            };
+
+            cmbStatus = new ComboBox
+            {
+                Location = new Point(130, 283),
+                Size = new Size(200, 25),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            cmbStatus.Items.AddRange(new object[] { "Pending", "In Progress", "Complete", "Overdue" });
+            cmbStatus.SelectedIndex = 0;
+
+            // Reminders
+            var lblReminders = new Label
+            {
+                Text = "Reminders:",
+                Font = new Font("Arial", 9, FontStyle.Bold),
+                Location = new Point(20, 325),
+                Size = new Size(100, 20)
+            };
+
+            chkRemind24Hours = new CheckBox
+            {
+                Text = "☑ Remind me 24 hours before deadline",
+                Location = new Point(130, 323),
+                Size = new Size(300, 25),
+                Checked = true
+            };
+
+            chkRemind1Week = new CheckBox
+            {
+                Text = "☑ Remind me 1 week before deadline",
+                Location = new Point(130, 353),
+                Size = new Size(300, 25)
+            };
+
+            // Buttons
+            btnSave = new Button
+            {
+                Text = "💾 Save",
+                Location = new Point(350, 450),
+                Size = new Size(100, 35)
+            };
+            btnSave.Click += BtnSave_Click;
+
+            btnCancel = new Button
+            {
+                Text = "❌ Cancel",
+                Location = new Point(460, 450),
+                Size = new Size(100, 35)
+            };
+            btnCancel.Click += (s, e) => this.Close();
+
+            // Add all controls
+            this.Controls.Add(lblCourse);
+            this.Controls.Add(cmbCourse);
+            this.Controls.Add(lblTitle);
+            this.Controls.Add(txtTitle);
+            this.Controls.Add(lblDescription);
+            this.Controls.Add(txtDescription);
+            this.Controls.Add(lblDueDate);
+            this.Controls.Add(dtpDueDate);
+            this.Controls.Add(lblPriority);
+            this.Controls.Add(priorityControl);
+            this.Controls.Add(lblStatus);
+            this.Controls.Add(cmbStatus);
+            this.Controls.Add(lblReminders);
+            this.Controls.Add(chkRemind24Hours);
+            this.Controls.Add(chkRemind1Week);
+            this.Controls.Add(btnSave);
+            this.Controls.Add(btnCancel);
+        }
+
+        private void LoadAssignmentData()
+        {
+            txtTitle.Text = _editingAssignment.Title;
+            txtDescription.Text = _editingAssignment.Description;
+            dtpDueDate.Value = _editingAssignment.DueDate;
+            priorityControl.SelectedPriority = _editingAssignment.Priority;
+            cmbStatus.SelectedItem = _editingAssignment.Status;
+            chkRemind24Hours.Checked = _editingAssignment.RemindOneDayBefore;
+            chkRemind1Week.Checked = _editingAssignment.RemindOneWeekBefore;
+        }
+
+        private void PriorityControl_PriorityChanged(object sender, PriorityChangedEventArgs e)
+        {
+            // Optional: Show message or update UI
+            // MessageBox.Show($"Priority changed to: {e.Priority}", "Priority Update");
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            // Validation
+            if (string.IsNullOrWhiteSpace(txtTitle.Text))
+            {
+                MessageBox.Show("Please enter an assignment title.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dtpDueDate.Value <= DateTime.Now)
+            {
+                var result = MessageBox.Show(
+                    "The due date is in the past. Do you want to continue?",
+                    "Past Due Date",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No)
+                    return;
+            }
+
+            try
+            {
+                if (_isEditMode)
+                {
+                    // Update existing assignment
+                    _editingAssignment.Title = txtTitle.Text;
+                    _editingAssignment.Description = txtDescription.Text;
+                    _editingAssignment.DueDate = dtpDueDate.Value;
+                    _editingAssignment.Priority = priorityControl.SelectedPriority;
+                    _editingAssignment.Status = cmbStatus.SelectedItem.ToString();
+                    _editingAssignment.RemindOneDayBefore = chkRemind24Hours.Checked;
+                    _editingAssignment.RemindOneWeekBefore = chkRemind1Week.Checked;
+
+                    if (_editingAssignment.Status == "Complete" && !_editingAssignment.CompletedDate.HasValue)
+                    {
+                        _editingAssignment.CompletedDate = DateTime.Now;
+                    }
+
+                    _assignmentRepo.Update(_editingAssignment);
+                }
+                else
+                {
+                    // Add new assignment
+                    var newAssignment = new Assignment
+                    {
+                        Title = txtTitle.Text,
+                        Description = txtDescription.Text,
+                        DueDate = dtpDueDate.Value,
+                        Priority = priorityControl.SelectedPriority,
+                        Status = cmbStatus.SelectedItem.ToString(),
+                        RemindOneDayBefore = chkRemind24Hours.Checked,
+                        RemindOneWeekBefore = chkRemind1Week.Checked,
+                        CourseId = _course.CourseId,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    _assignmentRepo.Add(newAssignment);
+                }
+
+                _assignmentRepo.Save();
+
+                MessageBox.Show("Assignment saved successfully!", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving assignment: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _context?.Dispose();
+            base.OnFormClosing(e);
+        }
+    }
+}

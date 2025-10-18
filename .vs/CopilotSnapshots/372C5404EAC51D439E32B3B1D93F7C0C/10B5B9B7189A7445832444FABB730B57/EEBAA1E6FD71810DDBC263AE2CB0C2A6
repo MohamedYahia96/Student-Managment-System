@@ -1,0 +1,143 @@
+﻿using System;
+using System.Windows.Forms;
+using System.Drawing;
+using StudentAssignmentManager.Data;
+using StudentAssignmentManager.Repositories;
+using StudentAssignmentManager.Models;
+
+namespace StudentAssignmentManager.Forms
+{
+    public partial class LoginForm : Form
+    {
+        private TextBox txtUsername;
+        private TextBox txtPassword;
+        private Button btnLogin;
+        private Button btnRegister;
+        private CheckBox chkRememberMe;
+        private Label lblTitle;
+        private Label lblUsername;
+        private Label lblPassword;
+
+        private StudentSystemDbContext _context;
+        private StudentRepository _studentRepo;
+
+        public Student LoggedInStudent { get; private set; }
+
+        public LoginForm()
+        {
+            InitializeComponent();
+            _context = new StudentSystemDbContext();
+            _studentRepo = new StudentRepository(_context);
+        }
+
+        private void InitializeComponent()
+        {
+            this.Text = "Student Assignment Manager - Login";
+            this.Size = new Size(400, 300);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+
+            lblTitle = new Label
+            {
+                Text = "Student Login",
+                Font = new Font("Arial", 16, FontStyle.Bold),
+                Location = new Point(100, 20),
+                Size = new Size(200, 30),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            lblUsername = new Label
+            {
+                Text = "Username:",
+                Location = new Point(50, 80),
+                Size = new Size(80, 20)
+            };
+
+            txtUsername = new TextBox
+            {
+                Location = new Point(140, 78),
+                Size = new Size(200, 20)
+            };
+
+            lblPassword = new Label
+            {
+                Text = "Password:",
+                Location = new Point(50, 120),
+                Size = new Size(80, 20)
+            };
+
+            txtPassword = new TextBox
+            {
+                Location = new Point(140, 118),
+                Size = new Size(200, 20),
+                PasswordChar = '*'
+            };
+
+            chkRememberMe = new CheckBox
+            {
+                Text = "Remember me",
+                Location = new Point(140, 150),
+                Size = new Size(150, 20)
+            };
+
+            btnLogin = new Button
+            {
+                Text = "Login",
+                Location = new Point(140, 190),
+                Size = new Size(90, 30)
+            };
+            btnLogin.Click += BtnLogin_Click;
+
+            btnRegister = new Button
+            {
+                Text = "Register",
+                Location = new Point(250, 190),
+                Size = new Size(90, 30)
+            };
+            btnRegister.Click += BtnRegister_Click;
+
+            this.Controls.Add(lblTitle);
+            this.Controls.Add(lblUsername);
+            this.Controls.Add(txtUsername);
+            this.Controls.Add(lblPassword);
+            this.Controls.Add(txtPassword);
+            this.Controls.Add(chkRememberMe);
+            this.Controls.Add(btnLogin);
+            this.Controls.Add(btnRegister);
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Please enter username and password.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            LoggedInStudent = _studentRepo.AuthenticateStudent(txtUsername.Text, txtPassword.Text);
+
+            if (LoggedInStudent != null)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password.", "Login Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnRegister_Click(object sender, EventArgs e)
+        {
+            var registerForm = new RegisterForm();
+            if (registerForm.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Registration successful! Please login.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    }
+}

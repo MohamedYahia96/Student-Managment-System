@@ -1,0 +1,530 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\LinQ \u0026 Entity\\C#_New\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\models\\assignment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\models\\assignment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\repositories\\courserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\repositories\\courserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\repositories\\assignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\repositories\\assignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\courseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\courseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\courseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\courseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\controls\\prioritycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\controls\\prioritycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\searchfilterform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\searchfilterform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\addeditcourseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\addeditcourseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\addeditassignmentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\addeditassignmentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\models\\reminder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\models\\reminder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\searchfilterform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\searchfilterform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\addeditassignmentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\addeditassignmentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\addeditcourseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\addeditcourseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\registerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\registerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|D:\\LinQ \u0026 Entity\\C#_New\\c#_new\\forms\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\forms\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|d:\\linq \u0026 entity\\c#_new\\c#_new\\controls\\prioritycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5FB30C4-591A-4475-B68A-C2C61EE34EB2}|C#_New\\C#_New.csproj|solutionrelative:c#_new\\controls\\prioritycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\LoginForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\LoginForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\LoginForm.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAcwC4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T20:23:21.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Program.cs",
+              "RelativeDocumentMoniker": "C#_New\\Program.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Program.cs",
+              "RelativeToolTip": "C#_New\\Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAmwAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:38:21.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegisterForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\RegisterForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\RegisterForm.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAcwIQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:04:32.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DashboardForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\DashboardForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\DashboardForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\DashboardForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\DashboardForm.cs",
+              "ViewState": "AgIAANIAAAAAAAAAAAAywPAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T20:25:26.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Assignment.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Assignment.cs",
+              "RelativeDocumentMoniker": "C#_New\\Models\\Assignment.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Assignment.cs",
+              "RelativeToolTip": "C#_New\\Models\\Assignment.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:30:42.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Course.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Course.cs",
+              "RelativeDocumentMoniker": "C#_New\\Models\\Course.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Course.cs",
+              "RelativeToolTip": "C#_New\\Models\\Course.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:30:12.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentRepository.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\StudentRepository.cs",
+              "RelativeDocumentMoniker": "C#_New\\Repositories\\StudentRepository.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\StudentRepository.cs",
+              "RelativeToolTip": "C#_New\\Repositories\\StudentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA2wBIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:50:53.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CourseRepository.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\CourseRepository.cs",
+              "RelativeDocumentMoniker": "C#_New\\Repositories\\CourseRepository.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\CourseRepository.cs",
+              "RelativeToolTip": "C#_New\\Repositories\\CourseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:51:18.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AssignmentRepository.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\AssignmentRepository.cs",
+              "RelativeDocumentMoniker": "C#_New\\Repositories\\AssignmentRepository.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\AssignmentRepository.cs",
+              "RelativeToolTip": "C#_New\\Repositories\\AssignmentRepository.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAcwD4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:51:47.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "C#_New\\Repositories\\Repository.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\Repository.cs",
+              "RelativeToolTip": "C#_New\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:49:10.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\IRepository.cs",
+              "RelativeDocumentMoniker": "C#_New\\Repositories\\IRepository.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Repositories\\IRepository.cs",
+              "RelativeToolTip": "C#_New\\Repositories\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:47:45.641Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Data\\DbContext.cs",
+              "RelativeDocumentMoniker": "C#_New\\Data\\DbContext.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Data\\DbContext.cs",
+              "RelativeToolTip": "C#_New\\Data\\DbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:44:55.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "README.md",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\README.md",
+              "RelativeDocumentMoniker": "C#_New\\README.md",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\README.md",
+              "RelativeToolTip": "C#_New\\README.md",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-10-17T13:13:58.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Form1.cs",
+              "RelativeDocumentMoniker": "C#_New\\Form1.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Form1.cs",
+              "RelativeToolTip": "C#_New\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T23:50:44.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Form1.cs",
+              "RelativeDocumentMoniker": "C#_New\\Form1.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Form1.cs [Design]",
+              "RelativeToolTip": "C#_New\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:15:29.896Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CourseForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\CourseForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\CourseForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\CourseForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\CourseForm.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAiwAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:30:47.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CourseForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\CourseForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\CourseForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\CourseForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\CourseForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:30:12.917Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PriorityControl.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Controls\\PriorityControl.cs",
+              "RelativeDocumentMoniker": "C#_New\\Controls\\PriorityControl.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Controls\\PriorityControl.cs [Design]",
+              "RelativeToolTip": "C#_New\\Controls\\PriorityControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T23:40:54.21Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AddEditCourseForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditCourseForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\AddEditCourseForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditCourseForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\AddEditCourseForm.cs",
+              "ViewState": "AgIAAPYAAAAAAAAAAAAwwFIBAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:34:31.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SearchFilterForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\SearchFilterForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\SearchFilterForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\SearchFilterForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\SearchFilterForm.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAmwD8AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T22:06:39.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AddEditAssignmentForm.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "RelativeToolTip": "C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAA3wLcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:36:01.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Student.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "C#_New\\Models\\Student.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Student.cs",
+              "RelativeToolTip": "C#_New\\Models\\Student.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:29:29.089Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DashboardForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\DashboardForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\DashboardForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\DashboardForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\DashboardForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T20:46:12.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Reminder.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Reminder.cs",
+              "RelativeDocumentMoniker": "C#_New\\Models\\Reminder.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Models\\Reminder.cs",
+              "RelativeToolTip": "C#_New\\Models\\Reminder.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA2wBcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T23:31:21.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "SearchFilterForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\SearchFilterForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\SearchFilterForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\SearchFilterForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\SearchFilterForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:36:30.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AddEditAssignmentForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\AddEditAssignmentForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditAssignmentForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\AddEditAssignmentForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:35:44.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AddEditCourseForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditCourseForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\AddEditCourseForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\AddEditCourseForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\AddEditCourseForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:32:14.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "RegisterForm.Designer.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.Designer.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\RegisterForm.Designer.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.Designer.cs",
+              "RelativeToolTip": "C#_New\\Forms\\RegisterForm.Designer.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAcwCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:07:57.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "LoginForm.Designer.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\LoginForm.Designer.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\LoginForm.Designer.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\LoginForm.Designer.cs",
+              "RelativeToolTip": "C#_New\\Forms\\LoginForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:05:54.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "RegisterForm.cs [Design]",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.cs",
+              "RelativeDocumentMoniker": "C#_New\\Forms\\RegisterForm.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Forms\\RegisterForm.cs [Design]",
+              "RelativeToolTip": "C#_New\\Forms\\RegisterForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:04:20.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PriorityControl.cs",
+              "DocumentMoniker": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Controls\\PriorityControl.cs",
+              "RelativeDocumentMoniker": "C#_New\\Controls\\PriorityControl.cs",
+              "ToolTip": "D:\\LinQ \u0026 Entity\\C#_New\\C#_New\\Controls\\PriorityControl.cs",
+              "RelativeToolTip": "C#_New\\Controls\\PriorityControl.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAIAwwGQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T00:00:53.629Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
